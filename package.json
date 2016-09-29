@@ -1,0 +1,15 @@
+{
+  "name": "forms-decor",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Auxx/forms-decor.git"
+  },
+  "scripts": {
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
