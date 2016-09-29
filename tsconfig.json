@@ -13,7 +13,7 @@
     "noEmitHelpers": false,
     "rootDir": "./src",
     "typeRoots": [
-      "../node_modules/@types"
+      "./node_modules/@types"
     ]
   },
   "compileOnSave": false,
