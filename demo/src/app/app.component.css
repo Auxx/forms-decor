@@ -1,0 +1,40 @@
+* {
+    font-family: sans-serif;
+}
+
+body {
+    font-size: 14px;
+}
+
+input, button {
+    font-size: 14px;
+}
+
+form {
+    margin-bottom: 8px;
+}
+
+form div {
+    margin: 4px 0;
+}
+
+form div span {
+    display: inline-block;
+    width: 100px;
+}
+
+input.ng-invalid {
+    border: 1px solid red;
+}
+
+input.ng-valid {
+    border: 1px solid green;
+}
+
+input.ng-pristine {
+    border: 1px solid blue;;
+}
+
+input.ng-pristine.ng-touched.ng-invalid {
+    border: 1px solid red;
+}

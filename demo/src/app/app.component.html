@@ -1,0 +1,33 @@
+<h1>forms-decor demo</h1>
+
+<h2>Create user</h2>
+
+<form [formGroup]="formNew" (ngSubmit)="create()">
+    <div>
+        <span>Name:</span>
+        <input type="text" formControlName="name">
+    </div>
+    <div>
+        <span>Password:</span>
+        <input type="password" formControlName="password">
+    </div>
+    <div>
+        <button type="submit" [disabled]="formNew.invalid">Create</button>
+    </div>
+</form>
+
+<h2>Update user</h2>
+
+<form [formGroup]="formExisting" (ngSubmit)="update()">
+    <div>
+        <span>Name:</span>
+        <input type="text" formControlName="name">
+    </div>
+    <div>
+        <span>Password:</span>
+        <input type="password" formControlName="password">
+    </div>
+    <div>
+        <button type="submit" [disabled]="formExisting.invalid">Update</button>
+    </div>
+</form>
