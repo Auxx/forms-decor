@@ -1,5 +1,8 @@
 .editorconfig
 .gitignore
+.npmignore
 tsconfig.json
+
+.idea/
 demo/
 node_modules/
