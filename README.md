@@ -69,3 +69,7 @@ export class AppComponent {
     It will be passed to `FormGroup` contructor instead of property name.
 2. `overrideValue` - overrides property value passed to `FormControl` constructor.
     **Warning!** This will override value for ALL instances of your model!
+
+## Demo application
+
+Demo application is available in [demo](https://github.com/Auxx/forms-decor/tree/master/demo) folder in git repository.
