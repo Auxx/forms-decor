@@ -1,9 +1,9 @@
-import {ValidatorFn, AsyncValidatorFn, FormControl as ngFormControl} from "@angular/forms";
+import {ValidatorFn, AsyncValidatorFn, FormControl } from "@angular/forms";
 
 export namespace FormsDecor {
     const ControlSymbol: string = "FDControl";
 
-    export function FormControl(definition: ControlDefinition) {
+    export function FDControl(definition: ControlDefinition) {
         return function(model: any, key: string): void {
             let meta: MetaDefinition = Reflect.getMetadata(ControlSymbol, model.constructor) || {};
             meta[key] = definition;
@@ -24,7 +24,7 @@ export namespace FormsDecor {
                 value = definition.overrideValue;
             }
 
-            result[controlName] = new ngFormControl(value, definition.validators, definition.asyncValidators);
+            result[controlName] = new FormControl(value, definition.validators, definition.asyncValidators);
         }
 
         return result;
