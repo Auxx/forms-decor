@@ -10,7 +10,7 @@ npm i --save forms-decor
 
 ## Usage
 
-1. Define your model class:
+* Define your model class:
 
 ```TypeScript
 import { FDControl } from 'forms-decor';
@@ -23,7 +23,7 @@ export class User {
 }
 ```
 
-2. Generate Angular form:
+* Generate Angular form:
 
 ```TypeScript
 import { Component } from '@angular/core';
@@ -46,7 +46,7 @@ export class AppComponent {
 }
 ```
 
-3. This will be equivalent to:
+* This will be equivalent to:
 
 ```TypeScript
 // ...
