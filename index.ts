@@ -1,9 +1,10 @@
-import { ValidatorFn, AsyncValidatorFn, FormControl, AbstractControl } from '@angular/forms';
+import { ValidatorFn, AsyncValidatorFn, FormControl, AbstractControl, FormGroup } from '@angular/forms';
 
 // Copy-pasting quick hacks from Angular 2 sources, lol.
 declare var Reflect: any;
 
 const ControlSymbol: string = 'FDControl';
+const GroupSymbol: string = 'FDGroup';
 
 /**
  * Class property decorator for specifying FormControl constructor arguments to be used with
@@ -14,7 +15,7 @@ const ControlSymbol: string = 'FDControl';
  * @constructor
  */
 export function FDControl(definition: ControlDefinition) {
-    return function (model: any, key: string): void {
+    return (model: any, key: string): void => {
         let meta: MetaDefinition = Reflect.getMetadata(ControlSymbol, model.constructor) || {};
         meta[key] = definition;
         Reflect.defineMetadata(ControlSymbol, meta, model.constructor);
@@ -22,13 +23,27 @@ export function FDControl(definition: ControlDefinition) {
 }
 
 /**
- * Generates form fields definition from specified model object.
+ * Class decorator for specifying FormGroup constructor arguments to be used with
+ * Angular forms.
+ *
+ * @param definition
+ * @returns {(constructor:Function)=>void}
+ * @constructor
+ */
+export function FDGroup(definition: GroupDefinition) {
+    return (constructor: Function): void => {
+        Reflect.defineMetadata(GroupSymbol, definition, constructor);
+    }
+}
+
+/**
+ * Generates form fields from specified model object.
  *
  * @param model
  * @returns {{}}
  */
-export function fromModel(model: any): { [key: string]: AbstractControl } {
-    let result: { [key: string]: AbstractControl } = {};
+export function controlFromModel(model: any): ControlMap {
+    let result: ControlMap = {};
     let meta: MetaDefinition = Reflect.getMetadata(ControlSymbol, model.constructor);
 
     for (let key in meta) {
@@ -47,16 +62,48 @@ export function fromModel(model: any): { [key: string]: AbstractControl } {
 }
 
 /**
+ * Generates FormGroup from the model and its properties.
+ *
+ * @param model
+ * @returns {FormGroup}
+ */
+export function groupFromModel(model: any): FormGroup {
+    let controls: ControlMap = controlFromModel(model);
+    let definition: GroupDefinition = Reflect.getMetadata(GroupSymbol, model.constructor);
+    return new FormGroup(controls, definition.validators, definition.asyncValidators);
+}
+
+/**
  * FDControl definition interface.
  */
 export interface ControlDefinition {
     /** Overrides property name. */
     name?: string;
-    validators?: ValidatorFn|ValidatorFn[];
-    asyncValidators?: AsyncValidatorFn|AsyncValidatorFn[];
     /** Overrides model objects value. */
     overrideValue?: any;
+    validators?: ValidatorFn|ValidatorFn[];
+    asyncValidators?: AsyncValidatorFn|AsyncValidatorFn[];
 }
+
+/**
+ * FDGroup definition interface.
+ */
+export interface GroupDefinition {
+    validators?: ValidatorFn;
+    asyncValidators?: AsyncValidatorFn;
+}
+
+/**
+ * FDArray definition interface.
+ */
+export interface ArrayDefinition {
+    validators?: ValidatorFn;
+    asyncValidators?: AsyncValidatorFn;
+}
+
+export type ControlMap = {
+    [key: string]: AbstractControl;
+};
 
 interface MetaDefinition {
     [index: string]: ControlDefinition;
