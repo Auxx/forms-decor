@@ -1,8 +1,10 @@
 <h1>forms-decor demo</h1>
 
-<h2>Create user</h2>
+<h2>controlFromModel()</h2>
 
-<form [formGroup]="formNew" (ngSubmit)="create()">
+<h3>Create user</h3>
+
+<form [formGroup]="formNew" (ngSubmit)="createUser()">
     <div>
         <span>Name:</span>
         <input type="text" formControlName="name">
@@ -16,9 +18,9 @@
     </div>
 </form>
 
-<h2>Update user</h2>
+<h3>Update user</h3>
 
-<form [formGroup]="formExisting" (ngSubmit)="update()">
+<form [formGroup]="formExisting" (ngSubmit)="updateUser()">
     <div>
         <span>Name:</span>
         <input type="text" formControlName="name">
@@ -31,3 +33,23 @@
         <button type="submit" [disabled]="formExisting.invalid">Update</button>
     </div>
 </form>
+
+<h2>groupFromModel()</h2>
+
+<h3>Update article</h3>
+
+<form [formGroup]="formArticle" (ngSubmit)="updateArticle()">
+    <div>
+        <span>Title:</span>
+        <input type="text" formControlName="title">
+    </div>
+    <div>
+        <span>Body:</span>
+        <input type="text" formControlName="body">
+    </div>
+    <div>
+        <button type="submit" [disabled]="formArticle.invalid">Update</button>
+    </div>
+</form>
+
+
