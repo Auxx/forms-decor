@@ -28,7 +28,7 @@ export class User {
 ```TypeScript
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { fromModel } from 'forms-decor';
+import { controlFromModel } from 'forms-decor';
 
 import { User } from './user';
 
@@ -41,7 +41,7 @@ export class AppComponent {
     form: FormGroup;
 
     constructor() {
-        this.form = new FormGroup(fromModel(new User()));
+        this.form = new FormGroup(controlFromModel(new User()));
     }
 }
 ```
